@@ -1,0 +1,5 @@
+package com.nnz.photoapp.api.account.ui.controllers;
+
+public class AccountController {
+
+}
