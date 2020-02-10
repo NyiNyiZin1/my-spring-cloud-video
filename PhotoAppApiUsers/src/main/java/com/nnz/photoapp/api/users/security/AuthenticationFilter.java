@@ -41,6 +41,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
         }
     }
 	
+	@Override
 	protected void successfulAuthentication(
 			HttpServletRequest req,
 			HttpServletResponse res,

@@ -33,6 +33,9 @@ public class UserEntity implements Serializable {
 	@Column(nullable=false,unique=true)
 	private String userId;
 	
+	@Column(nullable=false)
+	private String password;
+	
 	@Column(nullable=false,unique=true)
 	private String encryptedPassword;
 	
@@ -71,6 +74,12 @@ public class UserEntity implements Serializable {
 	}
 	public void setEncryptedPassword(String encryptedPassword) {
 		this.encryptedPassword = encryptedPassword;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	

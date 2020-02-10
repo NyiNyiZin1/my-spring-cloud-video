@@ -35,6 +35,7 @@ public class UsersController {
 		return "Working on port :"+env.getProperty("local.server.port");
 	}
 	
+	
 	@PostMapping(consumes= {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_VALUE},
 			//return xml and json format
 					produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_VALUE}
@@ -45,9 +46,11 @@ public class UsersController {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		
 		UserDto userDto = modelMapper.map(userDetails, UserDto.class);
+		System.err.println("?1>>>>>>>>>>>>>>>>>"+userDto.getPassword());
 		UserDto createdUser = usersService.createUser(userDto);
+		System.err.println("?2>>>>>>>>>>>>>>>>>"+createdUser.getPassword());
 		CreateUserRequestModel returnValue = modelMapper.map(createdUser,CreateUserRequestModel.class);
-		
+		System.err.println("?3>>>>>>>>>>>>>>>>>"+createdUser.getPassword());
 		return ResponseEntity.status(HttpStatus.CREATED).body(returnValue);
 	}
 
