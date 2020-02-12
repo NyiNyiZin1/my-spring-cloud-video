@@ -38,10 +38,10 @@ public class UserServiceImpl implements UserService{
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		UserEntity userEntity = modelMapper.map(userDetails, UserEntity.class);
-		userEntity.setEncryptedPassword("test");
+		//userEntity.setEncryptedPassword("test");
 		
-		UserEntity userEntity1 = userRepository.save(userEntity);
-		UserDto returnValue = modelMapper.map(userEntity1, UserDto.class);
+		userRepository.save(userEntity);
+		UserDto returnValue = modelMapper.map(userEntity, UserDto.class);
 		return returnValue;
 	}
 
@@ -53,6 +53,14 @@ public class UserServiceImpl implements UserService{
 		if(userEntity == null) throw new UsernameNotFoundException(username);
 		
 		return new User(userEntity.getEmail(),userEntity.getEncryptedPassword(),true,true,true,true,new ArrayList<>());
+	}
+
+	@Override
+	public UserDto getUserDetailsByEmail(String email) {
+		UserEntity userEntity = userRepository.findByEmail(email);
+		if(userEntity == null)throw new UsernameNotFoundException(email);
+		
+		return new ModelMapper().map(userEntity, UserDto.class);
 	}
 
 }

@@ -17,36 +17,39 @@ import com.nnz.photoapp.api.users.service.UserService;
 @Configuration
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
-	
-	private Environment env;
+
+	private Environment environment;
 	private UserService userService;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	@Autowired
-	public WebSecurity(Environment env, UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder) {
-		this.env=env;
-		this.bCryptPasswordEncoder=bCryptPasswordEncoder;
-		this.userService=userService;
+	public WebSecurity(Environment environment, UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+		this.environment = environment;
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+		this.userService = userService;
 	}
 
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-		//http.authorizeRequests().antMatchers("/users/**").permitAll();
-		http.authorizeRequests().antMatchers("/**").hasIpAddress(env.getProperty("gateway.ip"))
-		.and().addFilter(getAuthenticationFilter());
+		http.authorizeRequests().antMatchers("/users/**").permitAll()
+
+		//http.authorizeRequests().antMatchers("/**").hasIpAddress(environment.getProperty("gateway.ip"))
+		.and()
+		.addFilter(getAuthenticationFilter());
 		http.headers().frameOptions().disable();
 	}
 
 	private AuthenticationFilter getAuthenticationFilter() throws Exception {
 		// TODO Auto-generated method stub
-		AuthenticationFilter authenticationFilter=new AuthenticationFilter();
-		authenticationFilter.setAuthenticationManager(authenticationManager());
+		AuthenticationFilter authenticationFilter = new AuthenticationFilter(userService, environment, authenticationManager());
+		// authenticationFilter.setAuthenticationManager(authenticationManager());
+		authenticationFilter.setFilterProcessesUrl(environment.getProperty("login.url.path"));
 		return authenticationFilter;
 	}
-	
+
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-		auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder); 
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
 	}
 
 }
