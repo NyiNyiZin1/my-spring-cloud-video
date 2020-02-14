@@ -1,0 +1,4 @@
+1.http://172.16.4.111:8011/users-ws/users
+2.http://172.16.4.111:8011/users-ws/users/login
+3.http://172.16.4.111:8011/users-ws/users/status/check
+4.http://172.16.4.111:8012/PhoyoAppAPIConfigServer/native
