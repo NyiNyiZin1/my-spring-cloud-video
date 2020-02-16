@@ -1,4 +1,32 @@
+#API link
 1.http://${IP_ADDRESS}:8011/users-ws/users
 2.http://${IP_ADDRESS}:8011/users-ws/users/login
 3.http://${IP_ADDRESS}:8011/users-ws/users/status/check
-4.http://${IP_ADDRESS}:8012/PhoyoAppAPIConfigServer/native
+4.http://${IP_ADDRESS}:8012/${PROPERTIES NAME IN FILE OR GIT}/native
+5.http://localhost:8012/users-ws/default
+6.http://localhost:8011/actuator/health
+7.http://localhost:8011/users-ws/actuator/mappings
+8.http://localhost:8012/encrypt
+
+#how to install rabbitMQ window
+1.install otp_win64_22.2 for earlang
+2.install rabbitmq-server.ext
+3.run this comment "rabbitmq-plugins enable rabbitmq_management" in rabbitMq commenad prompt 
+4.http://localhost:15672
+
+#reference site
+https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html
+
+
+
+#in application.properties file system
+gateway.ip=192.168.163.1
+token.expiration_time = 864000000
+token.secret=hfgry463hf746hf573ydh475fhy5739
+login.url.path = /users/login
+
+#in users-ws.properties file system
+login.url.path = /users/login
+spring.datasource.url=jdbc:mysql://localhost:3306/photo_app?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+spring.datasource.username={cipher}ee4f44418eadcfb99cbce8dc8e9b540c2b74f5eb93ab8183f9b2bed625469566
+spring.datasource.password={cipher}ee4f44418eadcfb99cbce8dc8e9b540c2b74f5eb93ab8183f9b2bed625469566
