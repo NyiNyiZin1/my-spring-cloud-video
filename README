@@ -20,7 +20,7 @@ https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-
 
 
 #in application.properties file system
-gateway.ip=192.168.163.1
+gateway.ip=${IP_ADDRESS}
 token.expiration_time = 864000000
 token.secret=hfgry463hf746hf573ydh475fhy5739
 login.url.path = /users/login
